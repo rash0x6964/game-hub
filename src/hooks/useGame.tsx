@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import apiClinet from "../services/api-clinet";
 import { CanceledError } from "axios";
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
+  background_image: string
 }
 
 interface FetchGameRes {
   results: Game[];
 }
 
-export default function useGame() {
+function useGame() {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
 
@@ -31,3 +32,5 @@ export default function useGame() {
 
   return { games, error };
 }
+
+export default useGame
