@@ -8,18 +8,16 @@ function App() {
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
-      gap="1"
-      color="blackAlpha.700"
     >
-      <GridItem pl="2" area={"nav"}>
+      <GridItem area={"nav"}>
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem pl="2" bg="pink.300" area={"aside"}>
+        <GridItem area={"aside"}>
           Aside
         </GridItem>
       </Show>
-      <GridItem pl="2" bg="green.300" area={"main"}>
+      <GridItem area={"main"}>
         Main
       </GridItem>
     </Grid>
