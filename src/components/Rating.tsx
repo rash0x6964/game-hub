@@ -13,8 +13,8 @@ function Rating({ rating }: Props) {
   return <HStack alignItems="center">
 	{stars.map((star) => {
 		if (star < rating)
-	 		return <IoStarSharp size={20}/>
-		return <RiStarSLine size={25}/>
+	 		return <IoStarSharp key={star} size={20}/>
+		return <RiStarSLine key={star} size={25}/>
 	})}
   </HStack>;
 }
