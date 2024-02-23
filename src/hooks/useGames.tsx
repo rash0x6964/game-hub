@@ -2,12 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import apiClinet from "../services/api-clinet";
 import { FetchDataRes } from "../services/api-clinet";
-
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platform } from "./usePlatforms";
 
 export interface Game {
   id: number;

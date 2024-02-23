@@ -3,7 +3,7 @@ import { FetchDataRes } from "../services/api-clinet";
 import apiClinet from "../services/api-clinet";
 import platforms from "../data/platforms";
 
-interface Platform {
+export interface Platform {
   id: number;
   name: string;
   slug: string;
