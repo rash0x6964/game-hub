@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchDataRes } from "../services/api-clinet";
-import apiClinet from "../services/api-clinet";
+import APIClient from "../services/api-clinet";
 import platforms from "../data/platforms";
 
 export interface Platform {
@@ -9,15 +8,14 @@ export interface Platform {
   slug: string;
 }
 
+const apiClinet = new APIClient<Platform>("/platforms/lists/parents");
+
 const usePlatforms = () =>
   useQuery({
     queryKey: ["platforms"],
-    queryFn: () =>
-      apiClinet
-        .get<FetchDataRes<Platform>>("/platforms/lists/parents")
-        .then((res) => res.data),
+    queryFn: apiClinet.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24h
-    initialData: { results: platforms }
+    initialData: { results: platforms },
   });
 
 export default usePlatforms;

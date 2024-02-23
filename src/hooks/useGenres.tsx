@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchDataRes } from "../services/api-clinet";
-import apiClinet from "../services/api-clinet";
+import APIClient from "../services/api-clinet";
 import genres from "../data/genres";
 
 export interface Genre {
@@ -9,11 +8,12 @@ export interface Genre {
   image_background: string;
 }
 
+const apiClinet = new APIClient<Genre>("/genres")
+
 function useGenre() {
   return useQuery({
     queryKey: ["genres"],
-    queryFn: () =>
-      apiClinet.get<FetchDataRes<Genre>>("/genres").then((res) => res.data),
+    queryFn: apiClinet.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24h
 	initialData: { results: genres }
   });
