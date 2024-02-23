@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import APIClient from "../services/api-clinet";
 import { FetchDataRes } from "../services/api-clinet";
@@ -16,17 +16,23 @@ export interface Game {
 }
 
 function useGame(gameQuery: GameQuery) {
-  return useQuery<FetchDataRes<Game>, Error>({
+  return useInfiniteQuery<FetchDataRes<Game>, Error>({
     queryKey: ["games", gameQuery],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClinet.getAll({
         params: {
           genres: gameQuery.genre?.id,
           parent_platfroms: gameQuery.platform?.id,
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
+          page: pageParam,
         },
       }),
+
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage.next) return undefined;
+      return allPages.length + 1;
+    },
   });
 }
 

@@ -8,14 +8,14 @@ export interface Genre {
   image_background: string;
 }
 
-const apiClinet = new APIClient<Genre>("/genres")
+const apiClinet = new APIClient<Genre>("/genres");
 
 function useGenre() {
   return useQuery({
     queryKey: ["genres"],
     queryFn: apiClinet.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24h
-	initialData: { results: genres }
+    initialData: { count: genres.length, results: genres, next: null },
   });
 }
 

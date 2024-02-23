@@ -15,7 +15,7 @@ const usePlatforms = () =>
     queryKey: ["platforms"],
     queryFn: apiClinet.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24h
-    initialData: { results: platforms },
+    initialData: { count: platforms.length, results: platforms, next: null },
   });
 
 export default usePlatforms;
