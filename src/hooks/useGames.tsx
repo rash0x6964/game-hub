@@ -1,7 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import APIClient from "../services/api-clinet";
-import { FetchDataRes } from "../services/api-clinet";
+import APIClient, { FetchDataRes } from "../services/api-clinet";
 import { Platform } from "./usePlatforms";
 
 const apiClinet = new APIClient<Game>("/games");
