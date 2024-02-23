@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import useData from "./useData";
+import apiClinet from "../services/api-clinet";
+import { FetchDataRes } from "../services/api-clinet";
 
 export interface Platform {
   id: number;
@@ -17,18 +19,20 @@ export interface Game {
 }
 
 function useGame(gameQuery: GameQuery) {
-  return useData<Game>(
-    "/games",
-    {
-      params: {
-        genres: gameQuery.genre?.id,
-        platfroms: gameQuery.platform?.id,
-		ordering: gameQuery.sortOrder,
-		search: gameQuery.searchText
-      },
-    },
-    [gameQuery]
-  );
+  return useQuery<FetchDataRes<Game>, Error>({
+    queryKey: ["games", gameQuery],
+    queryFn: () =>
+      apiClinet
+        .get<FetchDataRes<Game>>("/games", {
+          params: {
+            genres: gameQuery.genre?.id,
+            parent_platfroms: gameQuery.platform?.id,
+            ordering: gameQuery.sortOrder,
+            search: gameQuery.searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
 }
 
 export default useGame;
