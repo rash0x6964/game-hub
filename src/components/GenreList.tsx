@@ -12,11 +12,11 @@ import useGenre, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
 interface Prop {
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
   onSelecteGenre: (genre: Genre) => void;
 }
 
-function GenreList({ selectedGenre, onSelecteGenre }: Prop) {
+function GenreList({ selectedGenreId, onSelecteGenre }: Prop) {
   const { data, error, isLoading } = useGenre();
   const skeletons = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14];
 
@@ -50,7 +50,7 @@ function GenreList({ selectedGenre, onSelecteGenre }: Prop) {
                 whiteSpace="normal"
                 textAlign="left"
                 variant="link"
-                fontWeight={selectedGenre?.id === genre.id ? "bold" : "normal"}
+                fontWeight={selectedGenreId === genre.id ? "bold" : "normal"}
                 onClick={() => onSelecteGenre(genre)}
               >
                 {genre.name}
