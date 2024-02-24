@@ -10,7 +10,7 @@ export interface Genre {
 
 const apiClinet = new APIClient<Genre>("/genres");
 
-function useGenre() {
+function useGenres() {
   return useQuery({
     queryKey: ["genres"],
     queryFn: apiClinet.getAll,
@@ -19,4 +19,4 @@ function useGenre() {
   });
 }
 
-export default useGenre;
+export default useGenres;
