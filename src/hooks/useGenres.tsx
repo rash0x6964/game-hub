@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-clinet";
 import genres from "../data/genres";
+import ms from "ms";
 
 export interface Genre {
   id: number;
@@ -14,7 +15,7 @@ function useGenres() {
   return useQuery({
     queryKey: ["genres"],
     queryFn: apiClinet.getAll,
-    staleTime: 24 * 60 * 60 * 1000, //24h
+    staleTime: ms("24h"),
     initialData: genres,
   });
 }

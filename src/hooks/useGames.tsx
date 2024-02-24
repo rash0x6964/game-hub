@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import APIClient, { FetchDataRes } from "../services/api-clinet";
 import { Platform } from "./usePlatforms";
+import ms from "ms";
 
 const apiClinet = new APIClient<Game>("/games");
 
@@ -32,6 +33,7 @@ function useGame(gameQuery: GameQuery) {
       if (!lastPage.next) return undefined;
       return allPages.length + 1;
     },
+    staleTime: ms("24h"),
   });
 }
 
