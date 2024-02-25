@@ -1,6 +1,5 @@
 import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import React from "react";
-import { GameQuery } from "../App";
 import useGame from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
@@ -8,18 +7,8 @@ import GameCardSkeleton from "./GameCardSkeleton";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
-interface Prop {
-  gameQuery: GameQuery;
-}
-
-function GameGrid({ gameQuery }: Prop) {
-  const {
-    data,
-    error,
-    isLoading,
-    hasNextPage,
-    fetchNextPage,
-  } = useGame(gameQuery);
+function GameGrid() {
+  const { data, error, isLoading, hasNextPage, fetchNextPage } = useGame();
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   const dataLength =
@@ -31,7 +20,7 @@ function GameGrid({ gameQuery }: Prop) {
       dataLength={dataLength}
       next={() => fetchNextPage()}
       hasMore={!!hasNextPage}
-      loader={<Spinner marginX="auto" marginY={6}/>}
+      loader={<Spinner marginX="auto" marginY={6} />}
       endMessage={
         <p style={{ textAlign: "center" }}>
           <b>Yay! You have seen it all</b>

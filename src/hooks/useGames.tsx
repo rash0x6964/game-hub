@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { GameQuery } from "../App";
-import APIClient, { FetchDataRes } from "../services/api-clinet";
-import { Platform } from "./usePlatforms";
 import ms from "ms";
+import APIClient, { FetchDataRes } from "../services/api-clinet";
+import useGameQueryStore from "../store";
+import { Platform } from "./usePlatforms";
 
 const apiClinet = new APIClient<Game>("/games");
 
@@ -15,7 +15,9 @@ export interface Game {
   rating_top: number;
 }
 
-function useGame(gameQuery: GameQuery) {
+function useGame() {
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
+
   return useInfiniteQuery<FetchDataRes<Game>, Error>({
     queryKey: ["games", gameQuery],
     queryFn: ({ pageParam = 1 }) =>
