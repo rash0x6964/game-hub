@@ -13,9 +13,11 @@ export interface Game {
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   rating_top: number;
+  slug: string;
+  description_raw: string;
 }
 
-function useGame() {
+function useGames() {
   const gameQuery = useGameQueryStore((s) => s.gameQuery);
 
   return useInfiniteQuery<FetchDataRes<Game>, Error>({
@@ -39,4 +41,4 @@ function useGame() {
   });
 }
 
-export default useGame;
+export default useGames;
