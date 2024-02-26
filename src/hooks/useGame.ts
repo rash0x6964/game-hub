@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-clinet";
-import { Game } from "./useGames";
+import { Game } from "../entities/Game";
 import ms from "ms";
 
 const apiClinet = new APIClient<Game>("/games");

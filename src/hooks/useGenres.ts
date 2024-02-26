@@ -2,12 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-clinet";
 import genres from "../data/genres";
 import ms from "ms";
-
-export interface Genre {
-  id: number;
-  name: string;
-  image_background: string;
-}
+import { Genre } from "../entities/Genre";
 
 const apiClinet = new APIClient<Genre>("/genres");
 
